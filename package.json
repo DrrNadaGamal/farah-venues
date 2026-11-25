@@ -1,0 +1,14 @@
+{
+  "name": "farah-venues",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Farah (فرح): bilingual wedding and events venue management demo",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "node dev-server.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.18.1"
+  }
+}
