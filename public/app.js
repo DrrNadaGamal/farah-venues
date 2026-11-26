@@ -166,7 +166,7 @@ function pgVenues() {
   const menuRows = d.menus.map((m) => `<tr><td><b>${esc(nm(m))}</b></td><td>${esc(t('mt.' + m.tier))}</td>${isMoney() ? `<td class="num">${egp(m.perGuest)}</td>` : ''}<td class="rowact">${role() === 'manager' ? `<button class="btn sm ghost2" data-act="menu-edit" data-id="${m.id}">${esc(t('btn.edit'))}</button>` : ''}</td></tr>`);
   return `<div class="bar"><h1>${esc(t('nav.venues'))}</h1>${role() === 'manager' ? `<div class="bar-act"><button class="btn pri sm" data-act="menu-new">${esc(t('ven.newMenu'))}</button></div>` : ''}</div>
   <section class="card"><h2>${esc(t('ven.halls'))}</h2>${tbl([[t('th.name')], [t('th.kind')], [t('th.capacity'), 1], [t('ven.upcoming'), 1], ['']], hallRows)}</section>
-  <section class="card" style="margin-top:1rem"><h2>${esc(t('ven.menus'))}</h2>${tbl([[t('th.name')], [t('th.kind')], ...(isMoney() ? [[[t('th.price'), 1]]] : []), ['']], menuRows)}</section>`;
+  <section class="card" style="margin-top:1rem"><h2>${esc(t('ven.menus'))}</h2>${tbl([[t('th.name')], [t('th.kind')], ...(isMoney() ? [[t('th.price'), 1]] : []), ['']], menuRows)}</section>`;
 }
 
 // ---------- checklist ----------
@@ -189,7 +189,7 @@ const jobNext = { assigned: ['accepted', 'act.acceptJob'], accepted: ['done', 'a
 function jobsTable(jobs) {
   const head = role() === 'vendor'
     ? [[t('th.code')], [t('th.kind')], [t('th.date')], [t('th.status')], [t('th.actions')]]
-    : [[t('th.code')], [t('th.client')], [t('th.kind')], [t('th.vendor')], ...(isMoney() ? [[[t('th.cost'), 1]]] : []), [t('th.date')], [t('th.status')], [t('th.actions')]];
+    : [[t('th.code')], [t('th.client')], [t('th.kind')], [t('th.vendor')], ...(isMoney() ? [[t('th.cost'), 1]] : []), [t('th.date')], [t('th.status')], [t('th.actions')]];
   const rows = jobs.map((j) => {
     const nxt = jobNext[j.status];
     const canStep = ['manager', 'planner', 'vendor'].includes(role());
@@ -216,7 +216,7 @@ function pgClients() {
   const d = D();
   const rows = d.clients.map((c) => `<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone)}</td><td class="num">${nf(c.events)}</td>${isMoney() ? `<td class="num">${egp(c.booked)}</td><td class="num">${egp(c.paid)}</td>` : ''}<td class="rowact">${canPlan() ? `<button class="btn sm ghost2" data-act="cl-edit" data-id="${c.id}">${esc(t('btn.edit'))}</button>` : ''}</td></tr>`);
   return `<div class="bar"><h1>${esc(t('nav.clients'))}</h1>${canPlan() ? `<div class="bar-act"><button class="btn pri sm" data-act="client-new">${esc(t('cl.newClient'))}</button></div>` : ''}</div>
-  ${tbl([[t('th.name')], [t('th.phone')], [t('th.events'), 1], ...(isMoney() ? [[[t('th.booked'), 1]], [[t('th.paid'), 1]]] : []), ['']], rows)}`;
+  ${tbl([[t('th.name')], [t('th.phone')], [t('th.events'), 1], ...(isMoney() ? [[t('th.booked'), 1], [t('th.paid'), 1]] : []), ['']], rows)}`;
 }
 
 // ---------- payments ----------
